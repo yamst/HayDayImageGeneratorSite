@@ -542,6 +542,8 @@ $(document).ready(() =>
 
     $("#copyAsTextListButton").on("click", copyAsTextListToClipboard);
 
+    $("#importItemsFromImageButton").on("click", importItemsFromImage);
+
     $("#clearAllButton").on("click", () =>
     {
         if(confirm("Are you sure?  This will clear the items currently added and can't be undone."))
@@ -1383,6 +1385,14 @@ function copyAsTextListToClipboard()
         .then(createSuccessfulCopyNotification)
         //.catch(e => console.log(e));
         .catch(console.log);
+}
+
+function importItemsFromImage()
+{
+    //TODO: get image from user.
+    //Run template matching on all item types, maybe multi-scale for success on all devices.
+    //Find a simple logic digit detector I can write in js (for the item counts.)
+    // match item to count and add all. 
 }
 
 // maybe include Item somewhere in this function name
