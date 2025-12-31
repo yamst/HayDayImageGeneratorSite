@@ -1387,9 +1387,33 @@ function copyAsTextListToClipboard()
         .catch(console.log);
 }
 
+function promptUserForImage(onImageLoaded) {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+
+    input.onchange = () => {
+        const file = input.files[0];
+        if (!file) return;
+
+        const img = new Image();
+        img.onload = () => onImageLoaded(img);
+        img.src = URL.createObjectURL(file);
+    };
+
+    input.click();
+}
+
 function importItemsFromImage()
 {
-    //TODO: get image from user.
+    promptUserForImage((img) => {
+        // This callback is executed AFTER the user selects an image
+        console.log("Image object received:", img);
+        console.log("Width:", img.width, "Height:", img.height);
+
+        // This is where you can process the image (pixels, canvas, template matching, etc.)
+        // For now, the "output" is the HTMLImageElement object
+    });
     //Run template matching on all item types, maybe multi-scale for success on all devices.
     //Find a simple logic digit detector I can write in js (for the item counts.)
     // match item to count and add all. 
